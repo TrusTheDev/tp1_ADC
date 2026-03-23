@@ -4,87 +4,68 @@
  *
  * Created on March 19, 2026, 5:31 PM
  */
-#include <p33FJ256GP710.h>
-
-int a, b, var_temp;
-
-typedef union {
-    struct {
-        unsigned int C:1;
-        unsigned int Z:1;
-        unsigned int OV:1;
-        unsigned int N:1;
-        unsigned int RA:1;
-        //IPL = orden de prioridades
-        unsigned int IPL:3;
-        unsigned int DC:1;
-        unsigned int DA:1;
-        unsigned int SAB:1;
-        unsigned int OAB:1;
-        unsigned int SB:1;
-        unsigned int SA:1;
-        unsigned int OB:1;
-        unsigned int OA:1;
-    } bits;
-    struct {
-        unsigned int :5;
-        unsigned int IPL1:1;
-        unsigned int IPL2:1;
-        unsigned int IPL3:1;
-    }IPLbits;
-    unsigned int completo;
-} t_sr;
-t_sr status_register;
-
-TRISD = 0x000A;
-
-void espera(int valor1, int valor2)
-{
-    int i,j,k;
-
-    for(i = 0; i < valor1; ++i)
-    {
-        j = i;
-    }
-
-    for(i = 0; i < valor2; ++i)
-    {
-        k = i;
-    }
-}
+#include "xc.h"
 
 int main(void) {
-
-    AD1PCFGH = 0xFFFF;
-    AD1PCFGL = 0xFFFF;
-    AD2PCFGL = 0xFFFF;
-
-    int x, y;
-
-    a = 10;
-    b = 3;
-    a -= b;
-    status_register.completo = SR;
-    var_temp = status_register.bits.C;
-    var_temp = status_register.bits.IPL;
-    a = status_register.IPLbits.IPL2;
-    x = 200;
-    y = 300;
-    espera(x, y);
-    x = 0;
-    y = 3;
-    espera(100, 400);
-    b -= b;
-    status_register.completo = SR;
-    var_temp = status_register.bits.Z;
-    var_temp = status_register.bits.N;
-
-    while(1)
-    {
-        if(x < y)
-            x = x + 1;
-        else
-            x = x - 1;
-    }
-
+    Ejercicio1();
 }
+// ----------------->>>EJERCICIO 1 <<<------------------------
+//Pulsadores y controles.
+typedef union {
+    struct{
+        unsigned int :5;
+        unsigned int PS6ON;
+        unsigned int PS7OFF;
+        unsigned int :5;
+        unsigned int PS13SEG;
+        unsigned int :3;
+    };
+    unsigned Controles;
+} controles_t;
+
+//Leds
+typedef union {
+    struct{
+        unsigned int LED0VERDE;
+        unsigned int LED1ROJO;
+        unsigned int : 14;
+    };
+    unsigned Leds;
+} leds_t;
+void Ejercicio1(){
+    //configuracion de pines
+    // TRISA leds
+    TRISA = 0x0003;
+    // TRISD controles
+    TRISD = 0x0608;
+    
+    //La maquina empieza detenida (led rojo)
+    LATAbits.LATA1 = 1;
+    //El led verde deberia estar en 0 por default, pero me aseguro
+    LATAbits.LATA0 = 0;
+    
+    //Inicializo structs
+    controles_t controles;
+    leds_t leds;
+    
+    while(1){
+        controles.Controles = PORTD;
+        leds.Leds = PORTA;
+        if(controles.PS13SEG == 0 && controles.PS7OFF == 0){
+            leds.LED0VERDE = 1;
+            //Realiza el trabajo trabajoso de manera muy trabajadora
+        }    
+        if(controles.PS13SEG == 1){
+            leds.LED0VERDE = 0;
+            leds.LED1ROJO = 1;
+            //Aviso de que no se cumple con la condición de seguridad.
+        }
+        if(controles.PS7OFF){
+            leds.LED0VERDE = 0;
+            leds.LED1ROJO = 1;
+            //Detención subita del programa
+            return 0;
+        }
+    }   
+}
+//---------------------------------------------------------------------
