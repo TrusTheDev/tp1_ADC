@@ -1,14 +1,11 @@
 /*
- * File:   newmainXC16.c
+ * File:   Ejercicio1.c
  * Author: trusty
  *
- * Created on March 19, 2026, 5:31 PM
+ * Created on March 23, 2026, 6:25 PM
  */
 #include "xc.h"
-
-int main(void) {
-    Ejercicio1();
-}
+#include "ejercicio1.h"
 // ----------------->>>EJERCICIO 1 <<<------------------------
 //Pulsadores y controles.
 typedef union {
@@ -32,6 +29,7 @@ typedef union {
     };
     unsigned Leds;
 } leds_t;
+
 void Ejercicio1(){
     //configuracion de pines
     // TRISA leds
@@ -68,4 +66,3 @@ void Ejercicio1(){
         }
     }   
 }
-//---------------------------------------------------------------------

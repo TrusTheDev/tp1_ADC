@@ -1,1 +1,22 @@
-/tp1.X/dist/
+# build
+build/
+dist/
+
+# Compilados
+*.o
+*.elf
+*.hex
+*.map
+*.list
+
+# Dependencias / temporales
+*.d
+*.log
+*.tmp
+
+# MPLAB
+nbproject/
+*~
+*.bak
+
+.generated_files/
