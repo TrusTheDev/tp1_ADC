@@ -15,7 +15,8 @@ dist/
 *.tmp
 
 # MPLAB
-nbproject/
+nbproject/private/
+
 *~
 *.bak
 
