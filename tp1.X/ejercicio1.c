@@ -33,7 +33,7 @@ typedef union {
 void Ejercicio1(){
     //configuracion de pines
     // TRISA leds
-    TRISA = 0x0003;
+    TRISA = 0;
     // TRISD controles
     TRISD = 0x0608;
     
@@ -45,22 +45,22 @@ void Ejercicio1(){
     //Inicializo structs
     controles_t controles;
     leds_t leds;
-    
     while(1){
         controles.Controles = PORTD;
-        leds.Leds = PORTA;
-        if(controles.PS13SEG == 0 && controles.PS7OFF == 0){
-            leds.LED0VERDE = 1;
+        leds.Leds = LATA;
+        if(controles.PS13SEG == 1 && controles.PS7OFF == 0){
+            LATAbits.LATA1 = 0;
+            LATAbits.LATA0 = 1;
             //Realiza el trabajo trabajoso de manera muy trabajadora
         }    
         if(controles.PS13SEG == 1){
-            leds.LED0VERDE = 0;
-            leds.LED1ROJO = 1;
+            LATAbits.LATA0 = 0;
+            LATAbits.LATA1 = 1;
             //Aviso de que no se cumple con la condición de seguridad.
         }
         if(controles.PS7OFF){
-            leds.LED0VERDE = 0;
-            leds.LED1ROJO = 1;
+            LATAbits.LATA0 = 0;
+            LATAbits.LATA1 = 1;
             //Detención subita del programa
             return 0;
         }
