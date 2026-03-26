@@ -10,12 +10,12 @@
 //Pulsadores y controles.
 typedef union {
     struct{
-        unsigned int :5;
-        unsigned int PS6ON;
-        unsigned int PS7OFF;
-        unsigned int :5;
-        unsigned int PS13SEG;
-        unsigned int :3;
+        unsigned :6;
+        unsigned PS6ON:1;
+        unsigned PS7OFF:1;
+        unsigned :5;
+        unsigned PS13SEG:1;
+        unsigned :2;
     };
     unsigned Controles;
 } controles_t;
@@ -23,9 +23,9 @@ typedef union {
 //Leds
 typedef union {
     struct{
-        unsigned int LED0VERDE;
-        unsigned int LED1ROJO;
-        unsigned int : 14;
+        unsigned LED0VERDE: 1;
+        unsigned LED1ROJO: 1;
+        unsigned : 14;
     };
     unsigned Leds;
 } leds_t;
@@ -33,9 +33,11 @@ typedef union {
 void Ejercicio1(){
     //configuracion de pines
     // TRISA leds
-    TRISA = 0x0003;
+    TRISA = 0x0000;
     // TRISD controles
-    TRISD = 0x0608;
+    TRISD = 0X20C0;
+    
+    TRISD = 0x0;
     
     //La maquina empieza detenida (led rojo)
     LATAbits.LATA1 = 1;
