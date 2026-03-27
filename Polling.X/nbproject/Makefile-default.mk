@@ -89,14 +89,22 @@ MP_LINKER_FILE_OPTION=,--script=p33FJ256GP710.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+<<<<<<< HEAD
 ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/f6a7f2cf767ca5058219e9791fb47430efad1d00 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+=======
+${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/98465ac073c82227f5225f221a7a8822bc9a2086 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+>>>>>>> 87d44d7564c45bbccd28f85b2b20ca224db088eb
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmainXC16.o.d 
 	@${RM} ${OBJECTDIR}/newmainXC16.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmainXC16.c  -o ${OBJECTDIR}/newmainXC16.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmainXC16.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
+<<<<<<< HEAD
 ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/291c1cd10f4f54f7dd408a7de37890e46af1b4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+=======
+${OBJECTDIR}/newmainXC16.o: newmainXC16.c  .generated_files/flags/default/d40a61a8d9b344ecf0b2112afcb8080e4962a3b4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+>>>>>>> 87d44d7564c45bbccd28f85b2b20ca224db088eb
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmainXC16.o.d 
 	@${RM} ${OBJECTDIR}/newmainXC16.o 

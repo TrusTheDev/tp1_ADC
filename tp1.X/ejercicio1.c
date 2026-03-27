@@ -61,12 +61,12 @@ void Ejercicio1(){
         if(controles.PS13SEG == 1){
             leds.bits.LED0VERDE = 0;
             leds.bits.LED1ROJO = 1;
-            //Aviso de que no se cumple con la condición de seguridad.
+            //Aviso de que no se cumple con la condiciï¿½n de seguridad.
         }
         if(controles.PS7OFF){
             leds.bits.LED0VERDE = 0;
             leds.bits.LED1ROJO = 1;
-            //Detención subita del programa
+            //Detenciï¿½n subita del programa
             return 0;
         }
     }   

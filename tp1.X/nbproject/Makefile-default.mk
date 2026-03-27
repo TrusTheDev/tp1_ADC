@@ -89,38 +89,38 @@ MP_LINKER_FILE_OPTION=,--script=p33FJ256GP710.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/ejercicio1.o: ejercicio1.c  .generated_files/flags/default/6ccb025e1a23338cb66eecf03fb6497932917eae .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/ejercicio1.o: ejercicio1.c  .generated_files/flags/default/66310b141d55031b6c27e7b69e37f9c8749a6f6d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ejercicio1.o.d 
 	@${RM} ${OBJECTDIR}/ejercicio1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ejercicio1.c  -o ${OBJECTDIR}/ejercicio1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ejercicio1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/ejercicio2.o: ejercicio2.c  .generated_files/flags/default/4d84e54868ab0829df4d6cba3c4cab9ec6a1b990 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/ejercicio2.o: ejercicio2.c  .generated_files/flags/default/d9fb4cde6d49b10be53f01eb0b800139734e2335 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ejercicio2.o.d 
 	@${RM} ${OBJECTDIR}/ejercicio2.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ejercicio2.c  -o ${OBJECTDIR}/ejercicio2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ejercicio2.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/60289c9bf6f79fdcdd2d9db1d12837749d89c5c4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/e49825ddf1cc0885aaf4a7ac7dd9b6069142747a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
-${OBJECTDIR}/ejercicio1.o: ejercicio1.c  .generated_files/flags/default/68986535810a3a5e3c2940b0909f7245e31c4c9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/ejercicio1.o: ejercicio1.c  .generated_files/flags/default/b06fd10fd197861e8359b81d5ba47a0ef01aed7 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ejercicio1.o.d 
 	@${RM} ${OBJECTDIR}/ejercicio1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ejercicio1.c  -o ${OBJECTDIR}/ejercicio1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ejercicio1.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/ejercicio2.o: ejercicio2.c  .generated_files/flags/default/ea7cdd7d25e3dd06ea9c5dcfe5498b82b035b4de .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/ejercicio2.o: ejercicio2.c  .generated_files/flags/default/6c05fef827b759fecf8c33932c06dddf8c988b5f .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ejercicio2.o.d 
 	@${RM} ${OBJECTDIR}/ejercicio2.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ejercicio2.c  -o ${OBJECTDIR}/ejercicio2.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ejercicio2.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/a954dfb4fbf721b13191a840f5af8e04e555474f .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/38f91608d015c5c031c22ce5acebbf8a3a701040 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
