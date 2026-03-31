@@ -42,7 +42,7 @@ typedef union {
 
 void Ejercicio1(){
     //Inicializo structs
-
+ 
     //configuracion de pines
     // TRISA leds
     TRISA = 0x0000;
