@@ -76,7 +76,6 @@ void Ejercicio1(){
             LATAbits.LATA0 = 0;
             LATAbits.LATA1 = 1;
             //Detencion subita del programa 
-            return 0;
         }
     }   
 }
