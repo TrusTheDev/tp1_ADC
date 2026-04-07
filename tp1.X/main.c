@@ -8,6 +8,6 @@
 #include "ejercicio2.h"
 
 int main(void) {
-    Ejercicio1();
-    //Ejercicio2();
+    //Ejercicio1();
+    Ejercicio2();
 }
