@@ -8,6 +8,11 @@
 #include "ejercicio2.h"
 
 int main(void) {
+    
+    AD1PCFGH = 0xFFFF;
+    AD1PCFGL = 0xFFFF;
+    AD2PCFGL = 0xFFFF;
+    
     //Ejercicio1();
     Ejercicio2();
 }

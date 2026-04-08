@@ -11,59 +11,79 @@
 #include <p33FJ256GP710.h>
 
 typedef union {
-    struct{
-        unsigned int puerta1: 1;
-        unsigned int puerta2: 1;
-        unsigned int puerta3: 1;
-        unsigned int puerta4: 1;
-        unsigned int puerta5: 1;
-        unsigned int presionGas: 1;
-        unsigned int electricidad: 1;
+
+    struct {
+        unsigned int puerta1 : 1;
+        unsigned int puerta2 : 1;
+        unsigned int puerta3 : 1;
+        unsigned int puerta4 : 1;
+        unsigned int puerta5 : 1;
+        unsigned int presionGas : 1;
+        unsigned int electricidad : 1;
         //Puede ignorarse
         unsigned int : 9;
     };
     unsigned int estados;
 } sensor_t;
 
-void Ejercicio2() {    
-    //Configuraciones de termostato
-    //80 grados
-    TRISA = 0x0000;
-    LATA = 0xFFFF;
-    int minimo = -20;
-    
-    // umbral
-    int umbral = 24;
-    
-    //temperatura actual del sensor
-    int temperatura;
-    
-    //Puerto B sensores de las puertas, gas y seguridad 
-    PORTB = 0x0000; 
+typedef union {
 
-    //Configuración de pines
-    //Levanto las 3 primeras puertas ON 
-    TRISB = 0x0007;
-    
+    struct {
+        unsigned int motor : 1;
+        unsigned int valvula : 1;
+        unsigned int : 14;
+    };
+    unsigned int salida;
+} salidas_t;
+
+int NumPuertasCerradas(int pin) {
+    int aux = pin & 0x1F; // enmascaro los últimos 5 bits
+    int cont = 0;
+
+    for (int i = 0; i < 5; i++) {
+        if (aux & (1 << i)) {
+            cont++;
+        }
+    }
+    return cont;
+}
+
     sensor_t sensores;
+    salidas_t salidas;
+    salidas_t anterior;
     
-    sensores.estados = PORTB;
-    int aux = PORTA;
-    while(1){
-        
-        if(PORTB != sensores.estados){
-            sensores.estados = PORTB;
+#define UMBRAL 0x70A3
+void Ejercicio2() {
+    //Configuraciones de termostato inicializa en -20 grados 0x0000
+    TRISA = 0xFFFF;
+    const int minimo = -20;
+    //Puerto B sensores de las puertas, gas y seguridad 
+    TRISB = 0xFFFF;
+    //Puerto C como salidas;
+    TRISC = 0x0000;
+    
+    sensores.estados = 0;
+
+
+    salidas.salida = 0;
+    anterior.salida = 0;
+  
+    while (1) {
+        sensores.estados = PORTB;
+        if ( PORTA < UMBRAL && sensores.presionGas && sensores.electricidad
+                && NumPuertasCerradas(sensores.estados) >= 3) {
+            salidas.motor = 1;
+            salidas.valvula = 1;
+        } else {
+            salidas.motor = 0;
+            salidas.valvula = 0;
         }
-        
-        if(aux != PORTA){
-            aux = PORTA;
-            temperatura = (aux*100) / 65535 + minimo;
-        }
-        
-        while(sensores.electricidad){
-            if(sensores.presionGas && temperatura < umbral) {
-                //prendo el aire
-            }
+
+        // Comparo con estado anterior
+        if (salidas.salida != anterior.salida) {
+            LATC = salidas.salida;
+            anterior.salida = salidas.salida;
         }
     }
 }
+
