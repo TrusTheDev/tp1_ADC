@@ -39,7 +39,7 @@ typedef union {
 int NumPuertasCerradas(int pin) {
     int aux = pin & 0x1F; // enmascaro los últimos 5 bits
     int cont = 0;
-
+    // Cuento los bits en 1
     for (int i = 0; i < 5; i++) {
         if (aux & (1 << i)) {
             cont++;
@@ -52,22 +52,15 @@ int NumPuertasCerradas(int pin) {
     salidas_t salidas;
     salidas_t anterior;
     
-#define UMBRAL 0x70A3
+#define UMBRAL 0x70A3 // 24º
 void Ejercicio2() {
-    //Configuraciones de termostato inicializa en -20 grados 0x0000
+    //Puerto A como entrada (termostato variable)
     TRISA = 0xFFFF;
-    const int minimo = -20;
-    //Puerto B sensores de las puertas, gas y seguridad 
+    //Puerto B como entrada (Sistema de control)
     TRISB = 0xFFFF;
-    //Puerto C como salidas;
+    //Puerto C como salidas (motor y válvula de gas);
     TRISC = 0x0000;
-    
-    sensores.estados = 0;
-
-
-    salidas.salida = 0;
     anterior.salida = 0;
-  
     while (1) {
         sensores.estados = PORTB;
         if ( PORTA < UMBRAL && sensores.presionGas && sensores.electricidad
@@ -78,8 +71,8 @@ void Ejercicio2() {
             salidas.motor = 0;
             salidas.valvula = 0;
         }
-
-        // Comparo con estado anterior
+        
+        // Comparo con el estado del pin anterior
         if (salidas.salida != anterior.salida) {
             LATC = salidas.salida;
             anterior.salida = salidas.salida;

@@ -7,14 +7,7 @@
 #include "xc.h"
 #include "ejercicio1.h"
 #include <p33FJ256GP710.h>
-// ----------------->>>EJERCICIO 1 <<<------------------------
-//Pulsadores y controles.
-
-/* Stimulus:
- * RD6 = Pulsador de encendido
- * RD7 = Pulsador de apagado
- * RD13 = condicion de seguridad
- */
+//Campo de bits salidas
 typedef union {
     struct{
         unsigned int LED0VERDE: 1;
@@ -23,7 +16,7 @@ typedef union {
     };
     unsigned int Leds;
 } leds_t;
-
+// Controles de la maquina.
 typedef union {
     struct{
         unsigned int :6;
@@ -41,8 +34,6 @@ typedef union {
     controles_t controles;
 
 void Ejercicio1(){
-    //Inicializo structs
- 
     //configuracion de pines
     // TRISA leds
     TRISA = 0x0000;
@@ -63,8 +54,8 @@ void Ejercicio1(){
             LATAbits.LATA0 = 1;
             //Realiza el trabajo trabajoso de manera muy trabajadora
         }    
-        // Si la maquina esta prendida pero la condicion de seguridad no se cumple 
-        //y no esta activada la detencion
+        /*Si la maquina esta prendida pero la condicion de seguridad no se cumple 
+        y no esta activada la detencion */
         if(controles.PS6ON && !controles.PS13SEG && !controles.PS7OFF){
             //Apago el led verde
             LATAbits.LATA0 = 0;
