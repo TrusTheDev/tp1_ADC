@@ -1,0 +1,114 @@
+## SCL Builder Setup File: Do not edit!!
+
+## VERSION: MPLAB X
+## FORMAT:  v2.00.01
+## DEVICE:  DSPIC33FJ256GP710
+
+## PINREGACTIONS
+cyc
+No Repeat
+--
+&
+## ADVPINREGACTIONS
+--
+&
+--
+COND2
+Any
+
+
+
+0
+cyc
+
+--
+&
+## CLOCK
+&
+## STIMULUSFILE
+&
+## RESPONSEFILE
+&
+## ASYNCH
+Pin
+RD6
+Set High
+
+Pulsador de encendido
+-1
+--
+Pin
+RD7
+Set High
+
+Detencion subita del programa
+-1
+--
+Pin
+RD13
+Set High
+
+Condicion de seguirdad
+-1
+--
+Pin
+RA15
+Set High
+
+Ultimo pin del termostato
+-1
+--
+Pin
+RB0
+Set High
+
+puerta 1
+-1
+--
+Pin
+RB1
+Set High
+
+puerta 2
+-1
+--
+Pin
+RB2
+Set High
+
+puerta 3
+-1
+--
+Pin
+RB3
+Set High
+
+puerta 4
+-1
+--
+Pin
+RB4
+Set High
+
+puerta 5
+-1
+--
+Pin
+RB5
+Set High
+
+Presion de gas
+-1
+--
+Pin
+RB6
+Set High
+
+Electricidad
+-1
+--
+&
+## ADVANCEDSCL
+
+1
+&
