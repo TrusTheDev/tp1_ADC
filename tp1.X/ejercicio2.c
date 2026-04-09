@@ -5,7 +5,6 @@
  * Created on March 23, 2026, 6:54 PM
  */
 
-
 #include "xc.h"
 #include "ejercicio2.h"
 #include <p33FJ256GP710.h>
@@ -26,8 +25,9 @@ typedef union {
     unsigned int estados;
 } sensor_t;
 
-typedef union {
 
+
+typedef union {
     struct {
         unsigned int motor : 1;
         unsigned int valvula : 1;
@@ -36,8 +36,17 @@ typedef union {
     unsigned int salida;
 } salidas_t;
 
+typedef union {
+    struct {
+        unsigned int temperatura_actual: 16;
+    };
+    unsigned int temperatura;
+} termostato_t;
+
 int NumPuertasCerradas(int pin) {
-    int aux = pin & 0x1F; // enmascaro los últimos 5 bits
+    int aux;
+    aux = pin & 0x1F; // enmascaro los últimos 5 bits
+    // aux = pin; (OJO, todos los pines del puerto B en entradas.)
     int cont = 0;
     // Cuento los bits en 1
     for (int i = 0; i < 5; i++) {
@@ -51,6 +60,7 @@ int NumPuertasCerradas(int pin) {
 sensor_t sensores;
 salidas_t salidas;
 salidas_t anterior;
+termostato_t termostato;
 
 #define UMBRAL 0x70A3 // 24º
 
@@ -65,7 +75,7 @@ void configuraciones() {
 }
 
 void LogicaPrograma() {
-    if (PORTA < UMBRAL && sensores.presionGas && sensores.electricidad
+    if (termostato.temperatura_actual < UMBRAL && sensores.presionGas && sensores.electricidad
             && NumPuertasCerradas(sensores.estados) >= 3) {
         salidas.motor = 1;
         salidas.valvula = 1;
@@ -86,6 +96,7 @@ void Ejercicio2() {
     configuraciones();
     while (1) {
         sensores.estados = PORTB;
+        termostato.temperatura = PORTA;
         LogicaPrograma();
         // Comparo con el estado del pin anterior
         EscribirSalidas();
