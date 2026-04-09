@@ -48,12 +48,13 @@ int NumPuertasCerradas(int pin) {
     return cont;
 }
 
-    sensor_t sensores;
-    salidas_t salidas;
-    salidas_t anterior;
-    
+sensor_t sensores;
+salidas_t salidas;
+salidas_t anterior;
+
 #define UMBRAL 0x70A3 // 24º
-void Ejercicio2() {
+
+void configuraciones() {
     //Puerto A como entrada (termostato variable)
     TRISA = 0xFFFF;
     //Puerto B como entrada (Sistema de control)
@@ -61,22 +62,33 @@ void Ejercicio2() {
     //Puerto C como salidas (motor y válvula de gas);
     TRISC = 0x0000;
     anterior.salida = 0;
+}
+
+void LogicaPrograma() {
+    if (PORTA < UMBRAL && sensores.presionGas && sensores.electricidad
+            && NumPuertasCerradas(sensores.estados) >= 3) {
+        salidas.motor = 1;
+        salidas.valvula = 1;
+    } else {
+        salidas.motor = 0;
+        salidas.valvula = 0;
+    }
+}
+
+void EscribirSalidas() {
+    if (salidas.salida != anterior.salida) {
+        LATC = salidas.salida;
+        anterior.salida = salidas.salida;
+    }
+}
+
+void Ejercicio2() {
+    configuraciones();
     while (1) {
         sensores.estados = PORTB;
-        if ( PORTA < UMBRAL && sensores.presionGas && sensores.electricidad
-                && NumPuertasCerradas(sensores.estados) >= 3) {
-            salidas.motor = 1;
-            salidas.valvula = 1;
-        } else {
-            salidas.motor = 0;
-            salidas.valvula = 0;
-        }
-        
+        LogicaPrograma();
         // Comparo con el estado del pin anterior
-        if (salidas.salida != anterior.salida) {
-            LATC = salidas.salida;
-            anterior.salida = salidas.salida;
-        }
+        EscribirSalidas();
     }
 }
 
